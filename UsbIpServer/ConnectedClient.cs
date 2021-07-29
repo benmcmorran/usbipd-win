@@ -138,8 +138,9 @@ namespace UsbIpServer
                     Logger.LogInformation(LogEvents.ClientDetach, $"Client {ClientContext.TcpClient.Client.RemoteEndPoint} released device at {exportedDevice.BusId} ({exportedDevice.Path}).");
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                Logger.LogError(LogEvents.ClientError, $"An exception occurred while communicating with the client: {ex}");
 #pragma warning disable CA1508 // Avoid dead conditional code (false possitive)
                 if (status != Status.ST_OK)
 #pragma warning restore CA1508 // Avoid dead conditional code
